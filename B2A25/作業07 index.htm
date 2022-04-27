@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>作業07</title>
+    <style>
+        div {
+			margin: 15px;
+			text-align: justify;
+			line-height: 30px;
+		}
+		h2 {
+			color: red;
+		}
+		table {
+		    width: 90%;
+		    border-color: dodgerblue;
+		    border-style: solid;
+		    border-collapse: collapse;
+		}
+		tr {
+		     text-align: center;
+		     border-color: dodgerblue;
+		     border-style: solid;
+		}
+		td {
+		     vertical-align: center;
+		     border-color: dodgerblue;
+		     border-style: solid;
+		}
+    </style>
+
+</head>
+
+<body>
+<script>
+    document.write("<div><h2>九九乘法表</h2></div>");
+
+    document.write("<table>");
+            for (x=1;x<10;x++){
+    document.write("<tr>");
+            for (y=1;y<10;y++){
+    document.write("<td>");
+    document.write(y + "X" + x + "=" + x*y + "<br>");
+    document.write("</td>");}
+    document.write("</tr>");}
+    document.write("</table>");
+
+</script>
+
+</body>
+
+</html>
