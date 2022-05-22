@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>作業12</title>
+    <style>
+      h4{
+          color: red;
+          font-weight: bolder;
+      }
+      div{
+          color: blue;
+          margin: 5px;
+      }
+      table {
+		    width: 90%;
+		    border-color: dodgerblue;
+		    border-style: solid;
+		    border-collapse: collapse;
+	  }
+	  tr {
+		     text-align: center;
+		     border-color: dodgerblue;
+		     border-style: solid;
+	  }
+	  td {
+		     vertical-align: middle;
+		     border-color: dodgerblue;
+		     border-style: solid;
+	  }
+      td:nth-child(1){
+          color: brown;
+      }
+      td:nth-child(2){
+          color: black;
+      }
+      td:nth-child(3){
+          color: blue;
+      }
+    </style>
+
+</head>
+
+<body>
+<form id="form01">
+    姓名: <input type="text" name="name01" value="楊沁陵"><br>
+    收件住址: <input type="text" name="address01" value="新北市新莊區民樂街105巷8號4樓"><br>
+    電話: <input type="tel" name="tel01" value="0971872170"><br>
+    電子郵件: <input type="email" name="email01" value="apple.cy.yang@gmail.com"><br>
+    指定送貨日期: <input type="date" name="date01"><br>
+    甜點種類: <br><input type="checkbox" name="dessert" id="dessert01" value="鮮奶泡芙(1盒20入)">鮮奶泡芙(1盒20入) 260元;
+    購買數量: <input type="number" name="name01"><br>
+    <input type="checkbox" name="dessert" id="dessert02" value="提拉米蘇(1個8吋)">提拉米蘇(1個8吋) 260元;
+    購買數量: <input type="number" name="name02"><br>
+    <input type="checkbox" name="dessert" id="dessert03" value="夏威夷堅果塔(1盒6入)">夏威夷堅果塔(1盒6入) 225元;
+    購買數量: <input type="number" name="name03"><br>
+    <input type="checkbox" name="dessert" id="dessert04" value="布朗尼蛋糕(1盒25入)">布朗尼蛋糕(1盒25入) 320元;
+    購買數量: <input type="number" name="name04"><br>
+</form>
+
+<button onclick="shoppingInfo()"> <h4>結帳</h4></button>
+<div id="demo"></div>
+<script>
+    var text = "<h4>您的購物資訊如下:</h4><table>";
+    var dessert = function (dessertType, dessertPrice, no){
+        this.Type = dessertType;
+        this.Price = dessertPrice;
+        this. subTotal = function(no){
+            text += "<tr><td>甜點種類: </td><td>" + this.Type + "</td><td>" + no + "單位</td></tr>";
+            text += "<tr><td>價格小計: </td><td>" + this.Price * no + "元</td></tr>";
+        };
+    };
+    var dessert01 = new dessert ("鮮奶泡芙(1盒20入)",260, 0);
+    var dessert02 = new dessert ("提拉米蘇(1個8吋)",260, 0);
+    var dessert03 = new dessert ("夏威夷堅果塔(1盒6入)",225, 0);
+    var dessert04 = new dessert ("布朗尼蛋糕(1盒25入)",320, 0);
+    function shoppingInfo() {
+        var x = document.getElementById("form01");
+        var item = "";
+        var sumToPay = 0;
+        var i;
+        for (i = 0; i < 5; i++) {
+            switch (i) {
+                case 0: text += "<tr><td>姓名: </td>"; break;
+                case 1: text += "<tr><td>收件住址: </td>"; break;
+                case 2: text += "<tr><td>電話: </td>";  break;
+                case 3: text += "<tr><td>電子郵件: </td>"; break;
+                case 4: text += "<tr><td>指定送貨日期: </td>"; break;
+            }
+            text += "<td>" + x.elements[i].value + "</td></tr>";
+        }
+        for (i = 5; i <= 11; i++) {
+            if (x.elements[i].checked === true) {
+                switch (i) {
+                case 5: dessert01.no = x.elements[i+1].value;
+                        sumToPay += dessert01.Price * dessert01.no;
+                        dessert01.subTotal(dessert01.no);
+                        break;
+                case 7: dessert02.no = x.elements[i+1].value;
+                        sumToPay += dessert02.Price * dessert02.no;
+                        dessert02.subTotal(dessert02.no);
+                        break;
+                case 9: dessert03.no = x.elements[i+1].value;
+                        sumToPay += dessert03.Price * dessert03.no;
+                        dessert03.subTotal(dessert03.no);
+                        break;
+                case 11: dessert04.no = x.elements[i+1].value;
+                        sumToPay += dessert04.Price * dessert04.no;
+                        dessert04.subTotal(dessert04.no);
+                        break;
+                }
+            }
+        }
+            text += "<tr><td>" + "價格合計:</td><td> " + sumToPay + "元</td></tr>";
+            document.getElementById("demo").innerHTML = text;
+            }
+</script>
+
+</body>
+
+</html>
